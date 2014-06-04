@@ -1,27 +1,38 @@
 
   var levelData = { 
      1:  [[0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,1,1,1,1,1,0,0,0],
+          [0,0,0,0,2,2,2,0,0,0,0],
+          [0,0,0,1,1,1,1,1,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,1,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,0,1,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,1,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,2,2,0,0,0,0],
-          [0,0,0,0,0,1,1,1,0,0,0]],
-     2:  [[0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,1,0,0,0,0],
-          [0,0,0,0,0,0,0,0,1,0,0],
-          [0,0,0,1,0,0,0,0,0,0,0],
-          [0,0,2,2,2,2,2,2,2,2,0],
-          [0,0,2,2,2,2,2,2,2,2,0],
-          [0,0,2,1,1,1,1,1,1,1,0],
-          [0,0,1,1,1,1,1,1,1,1,0],
-          [0,0,1,1,1,1,1,1,1,1,0],
-          [0,0,1,1,1,1,1,1,1,1,0]] };
+          [0,0,0,0,0,0,0,0,0,0,0]],
+     2:   [[0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,1,1,1,1,1,0,0,0],
+          [0,0,0,0,2,2,2,0,0,0,0],
+          [0,0,0,1,1,1,1,1,0,0,0],
+          [0,0,2,0,2,0,2,0,2,0,0],
+          [0,0,0,1,0,1,0,1,0,0,0],
+          [0,2,2,2,2,2,2,2,2,2,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0]],
+    3:    [[0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,1,1,1,1,1,0,0,0],
+          [0,2,1,1,2,2,2,1,1,2,0],
+          [0,2,2,1,1,1,1,1,2,2,0],
+          [1,1,1,1,2,2,2,1,1,1,1],
+          [0,2,2,0,1,1,1,0,2,2,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0]],};
 
   var spriteData = {
     'alien1': { sx: 0,  sy: 0,  w: 23, h: 18, cls: Alien, frames: 2 },
@@ -31,16 +42,18 @@
   }
 
   function startGame() {
-    var screen = new GameScreen("Alien Invaders","Press Space To Start",                                            // this is what is shown in the start up screen 
+    var screen = new GameScreen("Nazi Invaders","Press Space To Start",                                            // this is what is shown in the start up screen 
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
-                                 });
+                                     score = 0;
+        document.getElementById('score').innerHTML="Score : " + score;  });
+                                 
     Game.loadBoard(screen);
     Game.loop();
   }
 
   function endGame() {
-    var screen = new GameScreen("Game Over","(press space to restart)",
+    var screen = new GameScreen("You Died","(press space to restart)",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                  });
@@ -57,13 +70,13 @@
   }
 
 function endGame() {
-    var screen = new GameScreen("You Lose","Press Space To Restart", // this is what is presented when you get hit by a missle
+    var screen = new GameScreen("You Died","Press Space To Restart", // this is what is presented when you get hit by a missle
                                 
                                 function() {
         Game.loadBoard(new GameBoard(1));
 
         score = 0;
-        document.getElementById('score').innerHTML="Score : " + score;  });
+        document.getElementById('score').innerHTML="Score :" + score;  });
         
         Game.loadBoard(screen);
         
@@ -84,6 +97,9 @@ function endGame() {
         Game.loadBoard(screen);
         
     }
+
+
+
 
 
 
