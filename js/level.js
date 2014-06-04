@@ -31,7 +31,7 @@
   }
 
   function startGame() {
-    var screen = new GameScreen("Alien Invaders","press space to start",
+    var screen = new GameScreen("Alien Invaders","Press Space To Start",                                            // this is what is shown in the start up screen 
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                  });
@@ -56,8 +56,41 @@
     Game.loadBoard(screen);
   }
 
+function endGame() {
+    var screen = new GameScreen("You Lose","Press Space To Restart", // this is what is presented when you get hit by a missle
+                                
+                                function() {
+        Game.loadBoard(new GameBoard(1));
+
+        score = 0;
+        document.getElementById('score').innerHTML="Score : " + score;  });
+        
+        Game.loadBoard(screen);
+        
+    }
+    
+    
+    function winGame() {
+        var screen = new GameScreen("You Win","Press Space To Restart",  // this is shown when you have completed all the levels of the game
+                                    
+                                    function() {
+        Game.loadBoard(new GameBoard(1));
+                                        
+                                        score = 0;
+                                        
+                                    document.getElementById('score').innerHTML="Score : " + score;  
+                                    });
+        
+        Game.loadBoard(screen);
+        
+    }
+
+
+
+
+
   $(function() {
-    GameAudio.load({ 'fire' : 'media/laser.ogg', 'die' : 'media/explosion.ogg' }, 
+    GameAudio.load({ 'fire' : 'media/boom.mp3', 'die' : 'media/gun.mp3' }, //game audio sounds
                    function() { 
                        Game.initialize("#gameboard", levelData, spriteData,
                                       { "start": startGame,

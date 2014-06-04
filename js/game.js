@@ -3,8 +3,10 @@ var AlienFlock = function AlienFlock() {
   this.invulnrable = true;
   this.dx = 10; this.dy = 0;
   this.hit = 1; this.lastHit = 0;
-  this.speed = 10;
-
+  this.speed = 10;    //speed of the aliens moving across
+    
+    var score = 0;
+    
   this.draw = function() {};
 
   this.die = function() {
@@ -20,7 +22,7 @@ var AlienFlock = function AlienFlock() {
       this.lastHit = this.hit;
       this.dy = this.speed;
     } else {
-      this.dy=0;
+      this.dy=0;   //this is how the aliens move down
     }
     this.dx = this.speed * this.hit;
 
@@ -47,7 +49,7 @@ var AlienFlock = function AlienFlock() {
 var Alien = function Alien(opts) {
   this.flock = opts['flock'];
   this.frame = 0;
-  this.mx = 0;
+  this.mx = 0;   // where the aliens start on the canvas
 }
 
 Alien.prototype.draw = function(canvas) {
@@ -56,16 +58,19 @@ Alien.prototype.draw = function(canvas) {
 
 Alien.prototype.die = function() {
   GameAudio.play('die');
-  this.flock.speed += 1;
-  this.board.remove(this);
+  this.flock.speed += 1; //for every kill the aliens speed up by 1 each time
+  this.board.remove(this); //if hit the alien must be removed
+    score = score +1;
+    
+    document.getElementById('score').innerHTML="Score : " + score;
 }
 
 Alien.prototype.step = function(dt) {
   this.mx += dt * this.flock.dx;
-  this.y += this.flock.dy;
-  if(Math.abs(this.mx) > 10) { 
+  this.y += this.flock.dy;   
+  if(Math.abs(this.mx) > 10) { //this is how the aliens move and speed
     if(this.y == this.flock.max_y[this.x]) {
-      this.fireSometimes();
+      this.fireSometimes();  //this is how the aliens sometimes fire back
     }
     this.x += this.mx;
     this.mx = 0;

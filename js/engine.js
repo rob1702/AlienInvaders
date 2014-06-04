@@ -1,6 +1,6 @@
 var Game = new function() {                                                                  
   var KEY_CODES = { 37:'left', 39:'right', 32 :'fire' };
-  this.keys = {};
+  this.keys = {};  //this is the game key controls that will are used on the keyboard
 
   this.initialize = function(canvas_dom,level_data,sprite_data,callbacks) {
     this.canvas_elem = $(canvas_dom)[0];
@@ -24,7 +24,7 @@ var Game = new function() {
   this.loadBoard = function(board) { Game.board = board; };
 
   this.loop = function() { 
-    Game.board.step(100/1000); // the speed of the game 
+    Game.board.step(50/1000); // the speed of the game 
     Game.board.render(Game.canvas);
     setTimeout(Game.loop,30); // the higher the number the more laggy it gets
   };
@@ -145,11 +145,11 @@ var GameBoard = function GameBoard(level_number) {
     }
   };
 
-  this.nextLevel = function() { 
+  this.nextLevel = function() { //the input of levels
     return Game.level_data[level_number + 1] ? (level_number + 1) : false 
   };
  
-  this.loadLevel(Game.level_data[level_number]);
+  this.loadLevel(Game.level_data[level_number]); //loading of each level
 };
 
 var GameAudio = new function() {  // all of the audio settings below 
